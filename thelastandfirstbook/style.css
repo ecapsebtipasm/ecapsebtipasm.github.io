@@ -109,3 +109,6 @@ body {
     animation: none;
   }
 }
+
+/* TEMP: smoke test */
+body { outline: 6px solid red !important; }
