@@ -1,27 +1,29 @@
-/* Reset + base */
+/* -------------------------------------------------------
+   styles.css — page1
+   - Vintage typewriter font (1880s vibe)
+   - No dark overlay / no translucent backdrop
+   - Smaller type so each line fits
+   - Hover “burn” effect with ember/charred edge
+-------------------------------------------------------- */
+
+/* 1) Font: Special Elite (vintage typewriter) */
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+
+/* 2) Reset + base */
 * { box-sizing: border-box; }
 html, body { height: 100%; margin: 0; }
+
 body {
-  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  font-family: "Special Elite", "Courier New", Courier, monospace;
   color: #f7f7f7;
-  background-image: url("images/1881.jpg");
+  background-image: url("images/1881.jpg"); /* <-- keep this path correct */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed; /* subtle parallax feel */
 }
 
-/* Darken/soften the background for readability */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background:
-    radial-gradient(ellipse at center, rgba(0,0,0,0.35), rgba(0,0,0,0.65));
-  pointer-events: none;
-}
-
-/* Center the poem */
+/* 3) Layout */
 .page {
   min-height: 100dvh;
   display: flex;
@@ -31,17 +33,79 @@ body::before {
   text-align: center;
 }
 
-/* Typography of the poem */
+/* 4) Poem typography (smaller & wider so lines don’t wrap) */
 .poem {
-  white-space: pre-line; /* respects the line breaks in the HTML */
-  font-size: clamp(1.1rem, 2.5vw + 0.25rem, 2.2rem);
+  white-space: pre-line;                 /* respect line breaks */
+  font-size: clamp(0.9rem, 1.8vw + 0.2rem, 1.3rem);
   line-height: 1.35;
-  max-width: 28ch;
+  max-width: 50ch;                       /* wider measure */
   text-wrap: balance;
   text-shadow: 0 1px 6px rgba(0,0,0,0.55);
-  /* Optional subtle backdrop to separate from the image */
-  background: rgba(0, 0, 0, 0.18);
-  padding: 1.25em 1.1em;
-  border-radius: 18px;
-  backdrop-filter: blur(2px);
+  /* No translucent background, no blur, no rounded corners */
+  padding: 0;
+  border-radius: 0;
+}
+
+/* 5) Burn hover effect
+   - Wrap the word “burn” in: <span class="burn">burn</span>
+*/
+.burn {
+  position: relative;
+  display: inline-block;
+  padding: 0.05em 0.2em;
+  transition: color 300ms ease, background-color 300ms ease, transform 200ms ease;
+  cursor: default;
+  background: transparent;
+}
+
+/* On hover: browning text + faint singe */
+.burn:hover {
+  color: #5a3b1a;
+  background-color: #d0b38a33; /* subtle scorch in the middle */
+}
+
+/* Ember/charred edge using layered radial gradients */
+.burn:hover::before {
+  content: "";
+  position: absolute;
+  inset: -0.18em -0.22em;         /* sits slightly outside the word */
+  pointer-events: none;
+  background:
+    radial-gradient(120% 80% at 10% 40%, rgba(255,160,40,0.35) 0 15%, rgba(120,50,10,0.55) 16% 28%, transparent 29%),
+    radial-gradient(120% 80% at 80% 30%, rgba(255,120,20,0.30) 0 12%, rgba(80,30,5,0.55) 13% 26%, transparent 27%),
+    radial-gradient(90% 70% at 50% 100%, rgba(255,200,120,0.25) 0 10%, rgba(60,25,8,0.55) 11% 22%, transparent 23%),
+    radial-gradient(100% 80% at 50% 0%, rgba(255,140,0,0.28) 0 10%, rgba(70,30,6,0.6) 11% 24%, transparent 25%);
+  mix-blend-mode: multiply;
+  filter: blur(0.6px) contrast(1.05);
+  animation: ember 1.2s ease-in-out infinite alternate;
+  border-radius: 3px;
+  opacity: 0.95;
+}
+
+/* Crisp char line right at the edge */
+.burn:hover::after {
+  content: "";
+  position: absolute;
+  inset: -0.08em -0.1em;
+  border: 1.5px solid rgba(20,12,6,0.85);
+  box-shadow:
+    0 0 1px rgba(0,0,0,0.7),
+    0 0 6px rgba(255,120,30,0.15); /* faint hot glow */
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+/* Ember flicker */
+@keyframes ember {
+  0%   { opacity: 0.75; transform: translateY(0) scale(1); }
+  45%  { opacity: 1;    transform: translateY(-0.5px) scale(1.01); }
+  70%  { opacity: 0.85; transform: translateY(0.2px)  scale(0.995); }
+  100% { opacity: 0.9;  transform: translateY(-0.3px) scale(1.005); }
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .burn:hover::before {
+    animation: none;
+  }
 }
