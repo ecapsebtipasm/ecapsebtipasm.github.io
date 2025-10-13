@@ -1,6 +1,4 @@
 // Make words clickable/animatable, show Next after 3 gone.
-// Works even if prefers-reduced-motion is ON.
-
 (function () {
   const poemEl = document.getElementById('poem');
   const nextBtn = document.getElementById('nextBtn');
@@ -8,13 +6,12 @@
 
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Build word spans
+  // Split text into tokens (keep spaces/newlines)
   const text = poemEl.textContent;
   poemEl.textContent = '';
   const tokens = text.split(/(\s+|\n)/);
 
   let goneCount = 0;
-
   const markGone = () => {
     goneCount += 1;
     if (goneCount >= 3) {
@@ -37,14 +34,14 @@
     span.className = 'w';
     span.textContent = tok;
 
-    // tag burn/burning words specially
+    // Special case for "burn"/"burning"
     if (/^burn(?:ing)?[.,;:!?"]?$/i.test(tok)) span.classList.add('burn');
 
     span.addEventListener('click', () => {
       if (span.dataset.gone === '1') return;
 
-      // For motion users: animate and detect when finished.
       if (!prefersReduced) {
+        // Random flight vector
         const angle = (Math.random() * 240 - 120);
         const dist  = 200 + Math.random() * 220;
         const rad   = angle * Math.PI / 180;
@@ -57,7 +54,6 @@
         span.style.setProperty('--rz', rz);
 
         span.classList.add('flying');
-
         span.addEventListener('animationend', (e) => {
           if (e.animationName === 'fly') {
             span.style.visibility = 'hidden';
@@ -66,8 +62,8 @@
           }
         }, { once: true });
       } else {
-        // Reduced motion: fade out quickly and count immediately.
-        span.classList.add('flying');          // CSS makes it fade/scale
+        // Reduced motion: simple fade/scale
+        span.classList.add('flying');
         setTimeout(() => {
           span.style.visibility = 'hidden';
           span.dataset.gone = '1';
