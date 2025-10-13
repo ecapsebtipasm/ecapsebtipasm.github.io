@@ -5,24 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Burning Books — Web Art</title>
 
-  <!-- Preload the background image (correct folder) -->
+  <!-- Preload the background image -->
   <link rel="preload" href="images/1881.jpg" as="image" />
-
-  <!-- Link to your CSS (file is named style.css) -->
-  <link rel="stylesheet" href="style.css?v=1" />
+  <link rel="stylesheet" href="style.css?v=3" />
 </head>
 <body>
   <main class="page">
-    <p class="poem">
-I have recently started <span class="burn">burning</span> books
+    <p class="poem" id="poem">
+I have recently started burning books
 Just the books the library no longer wants
 Just the books I am in charge of throwing out
 I take them home
 I carry them like children
 I carry them like grocery bags
 I take them out to my backyard
-And I <span class="burn">burn</span> them
+And I burn them
     </p>
   </main>
+
+  <!-- Next button (hidden until 3 words fly away) -->
+  <a id="nextBtn" href="2.html" aria-hidden="true">next →</a>
+
+  <script src="script.js" defer></script>
 </body>
 </html>
