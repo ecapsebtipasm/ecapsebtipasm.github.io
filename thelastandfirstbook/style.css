@@ -4,7 +4,7 @@ html, body { height: 100%; margin: 0; }
 body {
   font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   color: #f7f7f7;
-  background-image: url("1881.jpg");
+  background-image: url("images/1881.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
