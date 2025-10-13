@@ -1,69 +1,79 @@
-// Split the poem into per-word spans, mark "burn"/"burning", attach interactions.
-// After 3 words fly away, reveal the "next" button.
+// Make words clickable/animatable, show Next after 3 gone.
+// Works even if prefers-reduced-motion is ON.
 
 (function () {
   const poemEl = document.getElementById('poem');
   const nextBtn = document.getElementById('nextBtn');
   if (!poemEl) return;
 
-  const text = poemEl.textContent; // preserve original
-  poemEl.textContent = '';          // clear
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  const tokens = text.split(/(\s+|\n)/); // keep spaces/newlines as tokens
-  let flownCount = 0;
+  // Build word spans
+  const text = poemEl.textContent;
+  poemEl.textContent = '';
+  const tokens = text.split(/(\s+|\n)/);
+
+  let goneCount = 0;
+
+  const markGone = () => {
+    goneCount += 1;
+    if (goneCount >= 3) {
+      nextBtn.classList.add('show');
+      nextBtn.setAttribute('aria-hidden', 'false');
+    }
+  };
 
   tokens.forEach(tok => {
     if (tok === '\n') {
-      const br = document.createElement('br');
-      br.className = 'br';
-      poemEl.appendChild(br);
+      poemEl.appendChild(document.createElement('br'));
       return;
     }
-
-    // whitespace (space/tab/etc.)
     if (/^\s+$/.test(tok)) {
       poemEl.appendChild(document.createTextNode(' '));
       return;
     }
 
-    // a word token
     const span = document.createElement('span');
     span.className = 'w';
     span.textContent = tok;
 
-    // special styling for "burn"/"burning" (case-insensitive, punctuation-safe)
-    if (/^burn(?:ing)?[.,;:!?"]?$/i.test(tok)) {
-      span.classList.add('burn');
-    }
+    // tag burn/burning words specially
+    if (/^burn(?:ing)?[.,;:!?"]?$/i.test(tok)) span.classList.add('burn');
 
-    // hover color handled by CSS; click == fly away
     span.addEventListener('click', () => {
-      if (span.classList.contains('flying')) return;
+      if (span.dataset.gone === '1') return;
 
-      // random flight vector
-      const angle = (Math.random() * 240 - 120); // -120..120 deg spray
-      const dist = 200 + Math.random() * 220;    // px
-      const rad = angle * (Math.PI / 180);
-      const tx = Math.cos(rad) * dist;
-      const ty = Math.sin(rad) * dist - 120; // bias upward a bit
-      const rz = (Math.random() * 60 - 30) + 'deg';
+      // For motion users: animate and detect when finished.
+      if (!prefersReduced) {
+        const angle = (Math.random() * 240 - 120);
+        const dist  = 200 + Math.random() * 220;
+        const rad   = angle * Math.PI / 180;
+        const tx    = Math.cos(rad) * dist;
+        const ty    = Math.sin(rad) * dist - 120;
+        const rz    = (Math.random() * 60 - 30) + 'deg';
 
-      span.style.setProperty('--tx', `${tx.toFixed(1)}px`);
-      span.style.setProperty('--ty', `${ty.toFixed(1)}px`);
-      span.style.setProperty('--rz', rz);
+        span.style.setProperty('--tx', `${tx.toFixed(1)}px`);
+        span.style.setProperty('--ty', `${ty.toFixed(1)}px`);
+        span.style.setProperty('--rz', rz);
 
-      span.classList.add('flying');
+        span.classList.add('flying');
 
-      span.addEventListener('animationend', (e) => {
-        if (e.animationName === 'fly') {
-          span.style.visibility = 'hidden';
-          flownCount += 1;
-          if (flownCount >= 3) {
-            nextBtn.classList.add('show');
-            nextBtn.setAttribute('aria-hidden', 'false');
+        span.addEventListener('animationend', (e) => {
+          if (e.animationName === 'fly') {
+            span.style.visibility = 'hidden';
+            span.dataset.gone = '1';
+            markGone();
           }
-        }
-      }, { once: false });
+        }, { once: true });
+      } else {
+        // Reduced motion: fade out quickly and count immediately.
+        span.classList.add('flying');          // CSS makes it fade/scale
+        setTimeout(() => {
+          span.style.visibility = 'hidden';
+          span.dataset.gone = '1';
+          markGone();
+        }, 260);
+      }
     });
 
     poemEl.appendChild(span);
