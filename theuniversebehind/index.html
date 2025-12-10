@@ -2,22 +2,51 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Camera Reveal Sketch</title>
-
-  <!-- p5 core -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
-  <!-- p5 video -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/addons/p5.dom.min.js"></script>
-
-  <link rel="stylesheet" href="style.css" />
+  <title>The Universe Behind</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <main>
-    <div id="canvas-container"></div>
-    <div id="visibility">visibility: 0%</div>
-  </main>
 
-  <script src="script.js"></script>
+<!-- PAGE 1: TITLE -->
+<div id="page1" class="page">
+  <div class="centerText bigTitle">The Universe Behind</div>
+</div>
+
+<!-- PAGE 2: POEM -->
+<div id="page2" class="page">
+  <div class="centerText poemBlock">
+    Light /līt/ (n./adj.)<br><br>
+    It always eats first. It eats the name off the thing and leaves the thing blinking.<br>
+    Then, inevitably, that mouth stands and talk like a child who never<br>
+    learned sorry.<br><br>
+    All the entities are spoken by it, only part of it would be remembered<br>
+    by its tongue. Lighten this or that, you put the subject after the verb, not<br>
+    the object. It breaks nouns into ash, and forget its purpose. Then the<br>
+    unspeakable remembers, like light doesn’t say and never said anything.<br><br>
+    It doesn’t say but said open.<br>
+    It doesn’t fall but enters.
+  </div>
+</div>
+
+<!-- PAGE 3: CAMERA EXPERIENCE -->
+<video id="cam" autoplay playsinline muted></video>
+
+<div id="container">
+  <canvas id="mainCanvas"></canvas>
+  <div id="visibility">visibility: 0%</div>
+
+  <!-- Controller pad -->
+  <div id="controls">
+    <button id="btnUp">▲</button>
+    <div id="middleRow">
+      <button id="btnLeft">◀</button>
+      <button id="btnRight">▶</button>
+    </div>
+    <button id="btnDown">▼</button>
+  </div>
+</div>
+
+<script src="script.js" defer></script>
 </body>
 </html>
