@@ -10,6 +10,7 @@ let snapshotInterval = 20;
 let lastSnapshot = 0;
 
 function setup() {
+  pixelDensity(1);            // IMPORTANT! fixes pixel indexing on retina screens
   let cnv = createCanvas(1280, 960);
   cnv.parent("canvas-container");
 
@@ -37,7 +38,8 @@ function draw() {
   }
 
   let percent = floor((currentThreshold / 255) * 100);
-  document.getElementById("visibility").innerText = "visibility: " + percent + "%";
+  document.getElementById("visibility").innerText =
+    "visibility: " + percent + "%";
 }
 
 function processFrame() {
@@ -49,19 +51,20 @@ function processFrame() {
 
   let brightnessValues = new Array(w * h);
 
+  // compute brightness from pixel array
   for (let i = 0; i < cam.pixels.length; i += 4) {
-    let b = brightness(color(cam.pixels[i], cam.pixels[i+1], cam.pixels[i+2]));
-    brightnessValues[i / 4] = b;
+    brightnessValues[i / 4] = brightness(
+      color(cam.pixels[i], cam.pixels[i + 1], cam.pixels[i + 2])
+    );
   }
 
-  let sorted = brightnessValues.slice().sort((a,b) => a - b);
+  let sorted = brightnessValues.slice().sort((a, b) => a - b);
   currentThreshold = sorted[floor(0.98 * sorted.length)];
-
-  accumulatedImage.noStroke();
-  substituteLayer.noStroke();
 
   accumulatedImage.beginDraw();
   substituteLayer.beginDraw();
+  accumulatedImage.noStroke();
+  substituteLayer.noStroke();
 
   for (let y = 0; y < h; y++) {
     for (let x = 0; x < w; x++) {
@@ -69,26 +72,28 @@ function processFrame() {
 
       if (brightnessValues[i] >= currentThreshold) {
         let idx = i * 4;
+
         let r = cam.pixels[idx];
         let g = cam.pixels[idx + 1];
         let b = cam.pixels[idx + 2];
 
+        // scale coordinates exactly like Processing
         let bigX = x * 2;
         let bigY = y * 2;
 
-        let maskC = textMask.get(bigX, bigY);
-        let inText = brightness(maskC) > 127;
+        let inText = brightness(textMask.get(bigX, bigY)) > 127;
 
         if (inText) {
           let sub = substituteColor(color(r, g, b));
+
           substituteLayer.fill(sub);
           substituteLayer.rect(bigX, bigY, 2, 2);
 
           revealLayer.beginDraw();
-          revealLayer.noStroke();
           revealLayer.fill(red(sub), green(sub), blue(sub), 10);
           revealLayer.rect(bigX, bigY, 2, 2);
           revealLayer.endDraw();
+
         } else {
           accumulatedImage.fill(r, g, b);
           accumulatedImage.rect(bigX, bigY, 2, 2);
@@ -113,15 +118,15 @@ function drawTextMask() {
   textMask.textAlign(LEFT, TOP);
   textMask.text(
     "Light /līt/ (n./adj.)\n" +
-    "It always eats first. It eats the name off the thing and leaves the thing blinking.\n" +
-    "Then, inevitably, that mouth stands and talk like a child who never\n" +
-    "learned sorry.\n" +
-    "All the entities are spoken by it, only part of it would be remembered\n" +
-    "by its tongue. Lighten this or that, you put the subject after the verb, not\n" +
-    "the object. It breaks nouns into ash, and forget its purpose. Then the\n" +
-    "unspeakable remembers, like light doesn’t say and never said anything.\n" +
-    "It doesn’t say but said open.\n" +
-    "It doesn’t fall but enters.",
+      "It always eats first. It eats the name off the thing and leaves the thing blinking.\n" +
+      "Then, inevitably, that mouth stands and talk like a child who never\n" +
+      "learned sorry.\n" +
+      "All the entities are spoken by it, only part of it would be remembered\n" +
+      "by its tongue. Lighten this or that, you put the subject after the verb, not\n" +
+      "the object. It breaks nouns into ash, and forget its purpose. Then the\n" +
+      "unspeakable remembers, like light doesn’t say and never said anything.\n" +
+      "It doesn’t say but said open.\n" +
+      "It doesn’t fall but enters.",
     40,
     200,
     width - 80
