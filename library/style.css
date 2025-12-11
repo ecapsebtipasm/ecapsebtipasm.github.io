@@ -1,0 +1,20 @@
+body {
+    margin: 0;
+    overflow: hidden;
+}
+
+#viewer {
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    cursor: none; /* we hide the default cursor */
+}
+
+/* cursor image that follows the mouse */
+.cursor-img {
+    position: absolute;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    width: 100px; /* adjust if needed */
+}

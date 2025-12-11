@@ -1,54 +1,44 @@
-// ====================
-//  Image Setup
-// ====================
-
 const totalImages = 10;
 let currentIndex = 1;
 
 const viewer = document.getElementById("viewer");
 
-// 创建 cursor 图片
+// Create the custom cursor image
 const cursorImage = document.createElement("img");
 cursorImage.className = "cursor-img";
 document.body.appendChild(cursorImage);
 
-// 初始化画面
+// Initialize first scene
 updateScene(currentIndex);
 
-// ====================
-//  点击切换到下一个 A 图
-// ====================
+// Click → next image
 viewer.addEventListener("click", () => {
     currentIndex++;
     if (currentIndex > totalImages) currentIndex = 1;
     updateScene(currentIndex);
 });
 
-// ====================
-//  鼠标移动更新 B 图位置
-// ====================
+// Mouse movement → move cursor image
 document.addEventListener("mousemove", (e) => {
     cursorImage.style.left = e.pageX + "px";
     cursorImage.style.top = e.pageY + "px";
 });
 
-// ====================
-//  更新场景（A 背景 + B_cursor）
-// ====================
+// Update background and cursor
 function updateScene(index) {
 
-    // 更新背景
-    viewer.style.backgroundImage = `url('footage/${index}_A.png')`;
+    // Update background
+    viewer.style.backgroundImage = `url('footage/${index}_A.PNG')`;
 
-    // 如果是第 7 号 → 使用默认鼠标
+    // Scene 7 uses default cursor
     if (index === 7) {
-        cursorImage.style.display = "none";      // 隐藏自定义 cursor
-        viewer.style.cursor = "default";         // 恢复默认箭头
+        cursorImage.style.display = "none";
+        viewer.style.cursor = "default";
         return;
     }
 
-    // 其他编号 → 使用 B 图作为鼠标
-    viewer.style.cursor = "none";                // 隐藏默认鼠标
-    cursorImage.src = `footage/${index}_B.png`;  // 设置 cursor 图片
-    cursorImage.style.display = "block";         // 显示 cursor
+    // All other scenes use custom PNG cursor
+    viewer.style.cursor = "none";
+    cursorImage.src = `footage/${index}_B.PNG`;
+    cursorImage.style.display = "block";
 }
