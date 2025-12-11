@@ -3,24 +3,25 @@ body {
     overflow: hidden;
 }
 
-/* A images: always fit INSIDE the screen, full visibility */
+/* A images: fit fully inside window */
 #viewer {
     width: 100vw;
     height: 100vh;
-    background-size: contain;      /* fits entire image */
+    background-size: contain;      /* fit A image fully */
     background-position: center;
     background-repeat: no-repeat;
     cursor: none;                  /* hide default cursor */
 }
 
-/* B images: cursor replacement, scaled but proportionally correct */
+/* B images: ORIGINAL SIZE (no scaling) */
 .cursor-img {
     position: absolute;
     pointer-events: none;
     transform: translate(-50%, -50%);
-
-    /* Scale to about 1/4 of the screen size, maintain ratio */
-    width: 25vw;        /* scales proportionally based on screen width */
-    height: auto;       /* preserves the original aspect ratio */
-    max-height: 25vh;   /* also limit by height to keep scaling consistent */
+    
+    /* remove all scaling — natural image size */
+    width: auto;
+    height: auto;
+    max-width: none;
+    max-height: none;
 }
