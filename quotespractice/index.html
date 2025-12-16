@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quote Practice</title>
+
+  <style>
+    body {
+      font-family: Georgia, serif;
+      background: #fafafa;
+      color: #333;
+      line-height: 1.6;
+      max-width: 700px;
+      margin: 80px auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      background: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .quote {
+      display: none;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 1.8em;
+    }
+
+    blockquote {
+      font-style: italic;
+      padding-left: 20px;
+      border-left: 4px solid #999;
+    }
+
+    nav {
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      margin: 0 12px;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+
+  <section id="q1" class="quote">
+    <h1>Quote 1</h1>
+    <blockquote>
+      I evoke the term 'handmade web' to refer to web pages coded by hand rather than by
+      software; web pages made and maintained by individuals rather than by businesses or
+      corporations; web pages which are provisional, temporary, or one-of-a-kind; web pages
+      which challenge conventions of reading, writing, design, ownership, privacy, security,
+      or identity.
+    </blockquote>
+    <nav>
+      <a href="#q2">Next →</a>
+    </nav>
+  </section>
+
+  <section id="q2" class="quote">
+    <h1>Quote 2</h1>
+    <blockquote>
+      I evoke the term 'handmade web' in order to make a correlation between handmade web
+      pages and handmade print materials, such as zines, pamphlets, and artists books.
+    </blockquote>
+    <nav>
+      <a href="#q1">← Previous</a> | <a href="#q3">Next →</a>
+    </nav>
+  </section>
+
+  <section id="q3" class="quote">
+    <h1>Quote 3</h1>
+    <blockquote>
+      I evoke the term 'handmade web' in order to advocate for an ongoing active engagement
+      with the making of web pages and of web policies.
+    </blockquote>
+    <nav>
+      <a href="#q2">← Previous</a> | <a href="#q4">Next →</a>
+    </nav>
+  </section>
+
+  <section id="q4" class="quote">
+    <h1>Quote 4</h1>
+    <blockquote>
+      I evoke the term 'handmade web' in order to draw attention both to the manual labour
+      involved in the composition of web pages, and the functioning of the web page itself as a
+      manual, a handbook, a set of instructions required for a computer program to run.
+    </blockquote>
+    <nav>
+      <a href="#q3">← Previous</a> | <a href="#q5">Next →</a>
+    </nav>
+  </section>
+
+  <section id="q5" class="quote">
+    <h1>Quote 5</h1>
+    <blockquote>
+      I evoke the term 'handmade web' in order to draw attention to the physical body.
+    </blockquote>
+    <nav>
+      <a href="#q4">← Previous</a> | <a href="#q6">Next →</a>
+    </nav>
+  </section>
+
+  <section id="q6" class="quote">
+    <h1>Quote 6</h1>
+    <blockquote>
+      I evoke the term 'handmade web' to suggest slowness and smallness as forms of resistance.
+    </blockquote>
+    <nav>
+      <a href="#q5">← Previous</a> | <a href="#q7">Next →</a>
+    </nav>
+  </section>
+
+  <section id="q7" class="quote">
+    <h1>End</h1>
+    <blockquote>
+      Handmade Web, J. R. Carpenter, March 2015.
+    </blockquote>
+    <nav>
+      <a href="#q6">← Previous</a> | <a href="#q1">Back to start</a>
+    </nav>
+  </section>
+
+  <script>
+    function showQuote() {
+      const hash = window.location.hash || '#q1';
+      document.querySelectorAll('.quote').forEach(q => q.style.display = 'none');
+      const active = document.querySelector(hash);
+      if (active) active.style.display = 'block';
+    }
+
+    window.addEventListener('hashchange', showQuote);
+    window.addEventListener('load', showQuote);
+  </script>
+
+</body>
+</html>
