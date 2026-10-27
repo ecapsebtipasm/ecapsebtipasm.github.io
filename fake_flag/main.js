@@ -1,4 +1,4 @@
-import { startFlagWall, resizeFlagWall } from './background.js?v=deck-3';
+import { startFlagWall } from './background.js?v=mobile-canvas-4';
 import * as THREE from 'three';
 import { GLTFLoader } from './vendor/GLTFLoader.js';
 import { RoomEnvironment } from './vendor/RoomEnvironment.js';
@@ -46,7 +46,6 @@ async function start() {
     const width = window.innerWidth, height = window.innerHeight;
     const aspect = width / Math.max(height, 1);
     const viewHeight = Math.max(6.8, 5.6 / aspect);
-    resizeFlagWall(width, height, 3.35 * height / viewHeight);
     camera.left = -viewHeight * aspect / 2;
     camera.right = viewHeight * aspect / 2;
     camera.top = viewHeight / 2;
