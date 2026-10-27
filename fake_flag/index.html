@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#ffffff">
   <title>Fake Flag</title>
-  <link rel="preload" as="image" href="./assets/flags/CN.svg" fetchpriority="high">
+  <link rel="preload" as="image" href="./assets/flags/cn.svg" fetchpriority="high">
   <style>
     html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#fff}
     #flag-wall{position:fixed;inset:0;z-index:0;overflow:hidden;display:grid;gap:0;
       grid-template-columns:repeat(var(--columns,3),minmax(0,1fr));
       grid-auto-rows:var(--tile-height,22.222222vw);align-content:start;
-      background:#de2910 url('./assets/flags/CN.svg') repeat 0 0 / var(--tile-width,33.333vw) var(--tile-height,22.222222vw)}
+      background:#de2910 url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTMgMzQyIj48cmVjdCB3aWR0aD0iNTEzIiBoZWlnaHQ9IjM0MiIgZmlsbD0iI2RlMjkxMCIvPjxnIGZpbGw9IiNmZmRlMDAiPjxwb2x5Z29uIHBvaW50cz0iODUuNTAwLDM0LjIwMCA5Ny4wMTgsNjkuNjQ3IDEzNC4yODksNjkuNjQ3IDEwNC4xMzYsOTEuNTU1IDExNS42NTMsMTI3LjAwMyA4NS41MDAsMTA1LjA5NSA1NS4zNDcsMTI3LjAwMyA2Ni44NjQsOTEuNTU1IDM2LjcxMSw2OS42NDcgNzMuOTgyLDY5LjY0NyIvPjxwb2x5Z29uIHBvaW50cz0iMTU2LjMzNyw0Mi45OTggMTY0LjQ5NCwzMy42MjcgMTU4LjEwMiwyMi45NzMgMTY5LjUzNSwyNy44MzUgMTc3LjY5MSwxOC40NjQgMTc2LjYwMSwzMC44NDAgMTg4LjAzNCwzNS43MDEgMTc1LjkyNywzOC40ODggMTc0LjgzNiw1MC44NjQgMTY4LjQ0NCw0MC4yMTEiLz48cG9seWdvbiBwb2ludHM9IjE4OC4yNzIsNzAuODE4IDE5OS40MjYsNjUuMzQ3IDE5Ny42NjksNTMuMDQ4IDIwNi4zMjAsNjEuOTY1IDIxNy40NzQsNTYuNDkzIDIxMS42NjYsNjcuNDc2IDIyMC4zMTcsNzYuMzk0IDIwOC4wNzcsNzQuMjY0IDIwMi4yNjksODUuMjQ3IDIwMC41MTIsNzIuOTQ4Ii8+PHBvbHlnb24gcG9pbnRzPSIxODguNzU4LDExNS4wMDIgMjAxLjE3NCwxMTQuNTU3IDIwNC41ODcsMTAyLjYxMSAyMDguODQ3LDExNC4yODIgMjIxLjI2MywxMTMuODM2IDIxMS40ODAsMTIxLjQ5NCAyMTUuNzQxLDEzMy4xNjUgMjA1LjQzNCwxMjYuMjI3IDE5NS42NTEsMTMzLjg4NiAxOTkuMDY0LDEyMS45NDAiLz48cG9seWdvbiBwb2ludHM9IjE1Ny42NDcsMTQzLjIxOCAxNjkuMjcyLDE0Ny42MDEgMTc3LjAzMywxMzcuOTAwIDE3Ni40NTcsMTUwLjMxMCAxODguMDgyLDE1NC42OTQgMTc2LjEwMCwxNTcuOTgwIDE3NS41MjQsMTcwLjM5MSAxNjguNjk2LDE2MC4wMTIgMTU2LjcxNCwxNjMuMjk4IDE2NC40NzUsMTUzLjU5NyIvPjwvZz48L3N2Zz4=') repeat 0 0 / var(--tile-width,33.333vw) var(--tile-height,22.222222vw)}
     #flag-wall img{display:block;width:100%;height:100%;object-fit:fill;user-select:none}
     canvas{position:fixed;inset:0;z-index:1;display:block;width:100%;height:100%;outline:none;pointer-events:none}
     #notice{z-index:2;position:fixed;inset:0;display:grid;place-items:center;background:#fff;color:#555;font:14px/1.6 system-ui,sans-serif;text-align:center;padding:24px}
@@ -26,6 +26,6 @@
   <canvas id="flag" aria-label="随机国旗网格背景前，播放视频并持续飘动的金属旗杆旗帜"></canvas>
   <video id="video" src="./assets/fake_flags.mp4" muted autoplay loop playsinline preload="auto" aria-hidden="true"></video>
   <div id="notice" role="status" hidden></div>
-  <script type="module" src="./main.js?v=flags-3x2-1"></script>
+  <script type="module" src="./main.js?v=flags-deck-3"></script>
 </body>
 </html>

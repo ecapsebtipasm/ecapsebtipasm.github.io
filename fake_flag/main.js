@@ -1,4 +1,4 @@
-import { startFlagWall, resizeFlagWall } from './background.js?v=3x2-1';
+import { startFlagWall, resizeFlagWall } from './background.js?v=deck-3';
 import * as THREE from 'three';
 import { GLTFLoader } from './vendor/GLTFLoader.js';
 import { RoomEnvironment } from './vendor/RoomEnvironment.js';
