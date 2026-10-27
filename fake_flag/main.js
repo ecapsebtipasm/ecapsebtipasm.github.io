@@ -1,3 +1,4 @@
+import { startFlagWall, resizeFlagWall } from './background.js';
 import * as THREE from 'three';
 import { GLTFLoader } from './vendor/GLTFLoader.js';
 import { RoomEnvironment } from './vendor/RoomEnvironment.js';
@@ -6,21 +7,23 @@ const canvas = document.querySelector('#flag');
 const video = document.querySelector('#video');
 const notice = document.querySelector('#notice');
 
+startFlagWall().catch(console.error);
+
 function showError(message) {
   notice.textContent = message;
   notice.hidden = false;
 }
 
 async function start() {
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false });
-  renderer.setClearColor(0xffffff, 1);
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setClearColor(0xffffff, 0);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.12;
 
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color(0xffffff);
+  scene.background = null;
   // Used only for metal reflections: this room is never added to the scene.
   const pmrem = new THREE.PMREMGenerator(renderer);
   const room = new RoomEnvironment();
@@ -43,6 +46,7 @@ async function start() {
     const width = window.innerWidth, height = window.innerHeight;
     const aspect = width / Math.max(height, 1);
     const viewHeight = Math.max(6.8, 5.6 / aspect);
+    resizeFlagWall(width, height, 3.35 * height / viewHeight);
     camera.left = -viewHeight * aspect / 2;
     camera.right = viewHeight * aspect / 2;
     camera.top = viewHeight / 2;
