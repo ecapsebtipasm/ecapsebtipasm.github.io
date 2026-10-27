@@ -5,12 +5,13 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#ffffff">
   <title>Fake Flag</title>
+  <link rel="preload" as="image" href="./assets/flags/CN.svg" fetchpriority="high">
   <style>
     html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#fff}
     #flag-wall{position:fixed;inset:0;z-index:0;overflow:hidden;display:grid;gap:0;
       grid-template-columns:repeat(var(--columns,3),minmax(0,1fr));
-      grid-auto-rows:var(--tile-height,25vw);align-content:start;
-      background:#fff url('./assets/flags/ad.svg') repeat 0 0 / var(--tile-width,33.333vw) var(--tile-height,25vw)}
+      grid-auto-rows:var(--tile-height,22.222222vw);align-content:start;
+      background:#de2910 url('./assets/flags/CN.svg') repeat 0 0 / var(--tile-width,33.333vw) var(--tile-height,22.222222vw)}
     #flag-wall img{display:block;width:100%;height:100%;object-fit:fill;user-select:none}
     canvas{position:fixed;inset:0;z-index:1;display:block;width:100%;height:100%;outline:none;pointer-events:none}
     #notice{z-index:2;position:fixed;inset:0;display:grid;place-items:center;background:#fff;color:#555;font:14px/1.6 system-ui,sans-serif;text-align:center;padding:24px}
@@ -25,6 +26,6 @@
   <canvas id="flag" aria-label="随机国旗网格背景前，播放视频并持续飘动的金属旗杆旗帜"></canvas>
   <video id="video" src="./assets/fake_flags.mp4" muted autoplay loop playsinline preload="auto" aria-hidden="true"></video>
   <div id="notice" role="status" hidden></div>
-  <script type="module" src="./main.js?v=flag-wall-1"></script>
+  <script type="module" src="./main.js?v=flags-3x2-1"></script>
 </body>
 </html>

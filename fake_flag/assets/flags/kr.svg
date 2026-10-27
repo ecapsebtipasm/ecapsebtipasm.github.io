@@ -1,24 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="flag-icons-kr" viewBox="0 0 640 480">
-  <defs>
-    <clipPath id="kr-a">
-      <path fill-opacity=".7" d="M-95.8-.4h682.7v512H-95.8z"/>
-    </clipPath>
-  </defs>
-  <g fill-rule="evenodd" clip-path="url(#kr-a)" transform="translate(89.8 .4)scale(.9375)">
-    <path fill="#fff" d="M-95.8-.4H587v512H-95.8Z"/>
-    <g transform="rotate(-56.3 361.6 -101.3)scale(10.66667)">
-      <g id="kr-c">
-        <path id="kr-b" fill="#000001" d="M-6-26H6v2H-6Zm0 3H6v2H-6Zm0 3H6v2H-6Z"/>
-        <use xlink:href="#kr-b" width="100%" height="100%" y="44"/>
-      </g>
-      <path stroke="#fff" d="M0 17v10"/>
-      <path fill="#cd2e3a" d="M0-12a12 12 0 0 1 0 24Z"/>
-      <path fill="#0047a0" d="M0-12a12 12 0 0 0 0 24A6 6 0 0 0 0 0Z"/>
-      <circle cy="-6" r="6" fill="#cd2e3a"/>
-    </g>
-    <g transform="rotate(-123.7 191.2 62.2)scale(10.66667)">
-      <use xlink:href="#kr-c" width="100%" height="100%"/>
-      <path stroke="#fff" d="M0-23.5v3M0 17v3.5m0 3v3"/>
-    </g>
-  </g>
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 513 342">
+<rect fill="#FFFFFF" width="513" height="342"/>
+<g stroke="#000000" stroke-width="14.25">
+	<path d="M84.6,107.8L132,36.6 M102.3,119.6l47.4-71.1 M120.1,131.5l47.4-71.1"/>
+	<path d="M345.4,281.7l47.4-71.1 M363.2,293.5l47.4-71.1 M381,305.4l47.4-71.1"/>
+
+	<path d="M132,305.4l-47.4-71.1 M149.8,293.5l-47.4-71.1 M167.6,281.7l-47.4-71.1"/>
+	<path d="M392.8,131.5l-47.4-71.1 M410.6,119.6l-47.4-71.1 M428.4,107.8L381,36.6"/>
+</g>
+<g stroke="#FFFFFF" stroke-width="12.5">
+	<path d="M357.3,238.2l59.3,39.5"/>
+	<path d="M117.2,263.9L135,252 M357.3,103.8L378,90 M395.8,78.1l17.8-11.9"/>
+</g>
+<circle fill="#CA163A" cx="256.5" cy="171" r="85.5"/>
+<path fill="#0E4896" d="M185.3,123.6c-13.1,19.6-7.8,46.2,11.9,59.3s46.2,7.8,59.3-11.9s39.6-24.9,59.3-11.9
+	c19.6,13.1,24.9,39.6,11.9,59.3c-26.2,39.3-79.3,49.9-118.6,23.7S159.2,162.8,185.3,123.6z"/>
 </svg>

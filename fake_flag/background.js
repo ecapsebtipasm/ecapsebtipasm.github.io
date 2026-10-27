@@ -32,8 +32,8 @@ function refresh() {
     const image = document.createElement('img');
     image.src = new URL(`./assets/flags/${name}`, import.meta.url).href;
     image.alt = '';
-    image.width = 640;
-    image.height = 480;
+    image.width = 513;
+    image.height = 342;
     image.draggable = false;
     fragment.append(image);
   }
@@ -46,7 +46,7 @@ function refresh() {
 export function resizeFlagWall(width, height, referenceWidth) {
   const nextColumns = Math.max(1, Math.round(width / referenceWidth));
   const tileWidth = width / nextColumns;
-  const tileHeight = tileWidth * 3 / 4;
+  const tileHeight = tileWidth * 2 / 3;
   const nextRows = Math.ceil(height / tileHeight);
   wall.style.setProperty('--columns', String(nextColumns));
   wall.style.setProperty('--tile-width', `${tileWidth}px`);
@@ -65,7 +65,7 @@ function restartTimer() {
 }
 
 export async function startFlagWall() {
-  const response = await fetch(new URL('./assets/flags.json', import.meta.url));
+  const response = await fetch(new URL('./assets/flags.json?v=3x2-1', import.meta.url));
   if (!response.ok) throw new Error(`Flag list: HTTP ${response.status}`);
   const names = await response.json();
   const loaded = await Promise.allSettled(names.map(async (name) => {
