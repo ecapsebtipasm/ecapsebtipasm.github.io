@@ -1,0 +1,37 @@
+
+body {
+  background-color: white;
+  color: black;
+  margin: 60px;
+}
+
+h1 {
+  position: absolute;
+
+  font-family: Georgia, serif;
+  font-size: 40px;
+  font-style: italic;
+  font-weight: normal;
+  color: rgb(50, 58, 32);
+
+  animation: move 4s ease-out forwards;
+}
+
+p {
+  font-family: Georgia, serif;
+  font-size: 18px;
+  line-height: 2;
+  font-style: italic;
+  white-space: pre-wrap;
+  width: fit-content;
+
+}
+
+
+.emphasis {
+  font-weight: bold;
+  font-weight: 700;
+}
+
+
+
